@@ -90,7 +90,13 @@ public class ModificarInventario extends javax.swing.JFrame {
         jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "ACTIVO", "INACTIVO", "DAÑADO" }));
         jComboBoxEstado.setToolTipText("");
 
-        jLabelPrecio.setText("Precio Dispositivo:");
+        jLabelPrecio.setText("FECHA DE VENCIMIENTO");
+
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioActionPerformed(evt);
+            }
+        });
 
         jComboBoxEstado1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "ACTIVO", "INACTIVO", "DAÑADO" }));
         jComboBoxEstado1.setToolTipText("");
@@ -317,6 +323,10 @@ public class ModificarInventario extends javax.swing.JFrame {
     private void txtConsecutivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConsecutivo1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtConsecutivo1ActionPerformed
+
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioActionPerformed
 
     /**
      * @param args the command line arguments

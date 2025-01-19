@@ -4,6 +4,8 @@
  */
 package com.mycompany.quickpasstesis.igu;
 
+import java.awt.Color;
+
 /**
  *
  * @author Usuario
@@ -102,7 +104,7 @@ public class InicioSesion extends javax.swing.JFrame {
         );
         jpanelCelesteLayout.setVerticalGroup(
             jpanelCelesteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 510, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanelGeneralLayout = new javax.swing.GroupLayout(jPanelGeneral);
@@ -112,20 +114,19 @@ public class InicioSesion extends javax.swing.JFrame {
             .addGroup(jPanelGeneralLayout.createSequentialGroup()
                 .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelGeneralLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(120, 120, 120)
+                        .addComponent(jLabelInicioSesion1))
+                    .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                        .addGap(103, 103, 103)
                         .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelContrase1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelUsuario1)
                             .addComponent(jTextFieldUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordFieldContra1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelGeneralLayout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelGeneralLayout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(jLabelInicioSesion1)))
+                            .addComponent(jPasswordFieldContra1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65)
+                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(jpanelCeleste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -146,8 +147,10 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
-            .addComponent(jpanelCeleste, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelGeneralLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jpanelCeleste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -161,7 +164,7 @@ public class InicioSesion extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jSeparatorContrase, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(384, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -175,7 +178,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addComponent(jSeparatorContrase, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81)
                 .addComponent(jSeparatorUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -191,7 +194,9 @@ public class InicioSesion extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,9 +207,39 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
+        jTextFieldUsuario1.setText("");//limpiar los campos
+        jPasswordFieldContra1.setText("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
+private void jTextFieldUsuario1FocusGained(java.awt.event.FocusEvent evt) {
+    // Limpiar el texto del campo usuario cuando el usuario hace clic
+    if (jTextFieldUsuario1.getText().equals("Ingrese su nombre de usuario")) {
+        jTextFieldUsuario1.setText("");
+        jTextFieldUsuario1.setForeground(Color.BLACK);
+    }
+}
 
+private void jPasswordFieldContra1FocusGained(java.awt.event.FocusEvent evt) {
+    // Limpiar el texto del campo contraseña cuando el usuario hace clic
+    if (String.valueOf(jPasswordFieldContra1.getPassword()).equals("jPasswordField1")) {
+        jPasswordFieldContra1.setText("");
+        jPasswordFieldContra1.setForeground(Color.BLACK);
+    }
+}
+
+// Restablecer texto predeterminado cuando el campo pierde el foco
+private void jTextFieldUsuario1FocusLost(java.awt.event.FocusEvent evt) {
+    if (jTextFieldUsuario1.getText().isEmpty()) {
+        jTextFieldUsuario1.setText("Ingrese su nombre de usuario");
+        jTextFieldUsuario1.setForeground(Color.GRAY);
+    }
+}
+
+private void jPasswordFieldContra1FocusLost(java.awt.event.FocusEvent evt) {
+    if (String.valueOf(jPasswordFieldContra1.getPassword()).isEmpty()) {
+        jPasswordFieldContra1.setText("jPasswordField1");
+        jPasswordFieldContra1.setForeground(Color.GRAY);
+    }
+}
     /**
      * @param args the command line arguments
      */

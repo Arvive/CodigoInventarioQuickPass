@@ -36,9 +36,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         btnCerrarSesion = new javax.swing.JButton();
         btnMantenimiento = new javax.swing.JButton();
         jpanelCeleste = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
         jPanelPPrincipl.setBackground(new java.awt.Color(255, 255, 255));
         jPanelPPrincipl.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -156,15 +156,22 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jpanelCeleste.setBackground(new java.awt.Color(102, 153, 255));
         jpanelCeleste.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuario\\Downloads\\file (5).png")); // NOI18N
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout jpanelCelesteLayout = new javax.swing.GroupLayout(jpanelCeleste);
         jpanelCeleste.setLayout(jpanelCelesteLayout);
         jpanelCelesteLayout.setHorizontalGroup(
             jpanelCelesteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 315, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelCelesteLayout.createSequentialGroup()
+                .addGap(0, 249, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jpanelCelesteLayout.setVerticalGroup(
             jpanelCelesteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jpanelCelesteLayout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -218,6 +225,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnMantenimiento;
     private javax.swing.JButton btnRegistro;
     private javax.swing.JButton btnVerDatos1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelPPrincipal;
     private javax.swing.JPanel jPanelBtn;
     private javax.swing.JPanel jPanelPPrincipl;
