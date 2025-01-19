@@ -6,7 +6,7 @@
     <class>com.mycompany.quickpasstesis.logica.Reporte</class>
     <class>com.mycompany.quickpasstesis.logica.Usuario</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/inventarioquickpass?serverTimezone=UTC"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/inventarioquickpass?serverTimezone=America/Costa_Rica"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value=""/>

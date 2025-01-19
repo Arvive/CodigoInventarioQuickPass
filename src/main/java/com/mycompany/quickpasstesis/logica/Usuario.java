@@ -3,7 +3,10 @@ package com.mycompany.quickpasstesis.logica;
 
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,20 +15,25 @@ import javax.persistence.Table;
 public class Usuario implements Serializable {
     
     @Id
+    @Column(name = "IDUSUARIO", length = 20) 
     private String idUsuario;
     private String nombre;
-    private String apellidos;
-    private String tipoRol;
+    @Enumerated(EnumType.STRING)
+    private TipoRol tipoRol;
     private String correo;
     private String contrasena;   
     
     public Usuario() {
     }
+    
+    public enum TipoRol {
+    ADMINISTRADOR,
+    USUARIO,
+    }
 
-    public Usuario(String idUsuario, String nombre, String apellidos, String tipoRol, String correo, String contrasena) {
+    public Usuario(String idUsuario, String nombre, TipoRol tipoRol, String correo, String contrasena) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
-        this.apellidos = apellidos;
         this.tipoRol = tipoRol;
         this.correo = correo;
         this.contrasena = contrasena;
@@ -47,19 +55,11 @@ public class Usuario implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getTipoRol() {
+    public TipoRol getTipoRol() {
         return tipoRol;
     }
 
-    public void setTipoRol(String tipoRol) {
+    public void setTipoRol(TipoRol tipoRol) {
         this.tipoRol = tipoRol;
     }
 

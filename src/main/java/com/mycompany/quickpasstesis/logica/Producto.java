@@ -38,25 +38,25 @@ public class Producto implements Serializable {
     private LocalDateTime fechaDevolucion; // no siempre sucede, solo en casos especificos
     
     public enum Categoria {
-    QuickPass,
+    QUICKPASS,
     }
     
     public enum Estado {
-    Activo, 
-    Dañado,
-    Inactivo,
-    Devuelto,
+    ACTIVO, 
+    DEFECTUOSO,
+    INACTIVO,
+    DEVUELTO,
     }
     
     public enum Tipo{
-    Prepago,
-    Postpago,
+    PREPAGO,
+    POSTPAGO,
     }
     
     public enum Oficina{
-    Oficina_Central,
-    San_Pedro,
-    Curridabat,
+    OFICINA_CENTRAL,
+    SAN_PEDRO,
+    CURRIDABAT,
     }
 
     public Producto() {
@@ -75,8 +75,17 @@ public class Producto implements Serializable {
         this.numSobreValor = numSobreValor;
         this.observaciones = observaciones;
         this.personRecibe = personRecibe;
-        this.fechaRegistro = LocalDateTime.now();// para que la fecha de registro se la del dia en el que se registrar
-        this.fechaVencimiento = fechaVencimiento;// sume los 4 anos de vencimiento auto al crear objeto
+        // para que la fecha de registro se la del dia en el que se registrar verificar esto y la forma de creacion por cualquier cosa 
+         if (fechaRegistro == null) {
+        this.fechaRegistro = LocalDateTime.now();
+        } else {
+        this.fechaRegistro = fechaRegistro;
+        }  
+        System.out.println("******************************fechaRegistro: " + this.fechaRegistro);
+    
+    
+        // sume los 4 anos de vencimiento auto al crear objeto
+  
         calcularFechaVencimiento();// si algo falla revisar aca
         this.fechaDevolucion = fechaDevolucion;
     }
@@ -204,6 +213,7 @@ public class Producto implements Serializable {
     public void calcularFechaVencimiento() {// calculo de fecha auto 
     if (fechaRegistro != null) {
         this.fechaVencimiento = fechaRegistro.plusYears(4).toLocalDate();
+         System.out.println("Fecha Vencimiento calculada: " + fechaVencimiento);
     }
 }
 

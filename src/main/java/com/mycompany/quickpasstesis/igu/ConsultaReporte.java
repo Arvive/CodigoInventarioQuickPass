@@ -154,18 +154,18 @@ public class ConsultaReporte extends javax.swing.JFrame {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         //metodo de limpiar para que ponga los campos en blanco
-        txtNombre.setText("");
+       /* txtNombre.setText("");
         txtRaza.setText("");
         txtColor.setText("");
         txtNomDuenio.setText("");
         txtCelDuenio.setText("");
         txtObservaciones.setText("");
         cmbAlergico.setSelectedIndex(0);//pone la primera opcion como defautl
-        cmbAtEsp.setSelectedIndex(0);
+        cmbAtEsp.setSelectedIndex(0)*/
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
+/*
         String nombreMasco = txtNombre.getText();// lo que se escriba en la IGU lo guarda en esta variable nombreMasco
         String raza = txtRaza.getText();
         String color = txtColor.getText();
@@ -181,7 +181,7 @@ public class ConsultaReporte extends javax.swing.JFrame {
         optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);// hay varios logitos segun el tipo de mensaje
         JDialog dialog = optionPane.createDialog("Guardado exitoso");
         dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
+        dialog.setVisible(true); */
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
