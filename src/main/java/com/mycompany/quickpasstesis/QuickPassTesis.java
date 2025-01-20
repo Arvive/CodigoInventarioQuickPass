@@ -38,7 +38,7 @@ public class QuickPassTesis {
         
         em.getTransaction().commit();*/ //CREACION TABLA PRODUCTOS BASE DE DATOS 
         
-       
+       /*
         Usuario usuario = new Usuario();
         usuario.setNombre("Ariana Vives");
         usuario.setIdUsuario("1234");
@@ -54,6 +54,6 @@ public class QuickPassTesis {
         
         
         
-        
+      */  
     }
 }

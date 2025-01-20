@@ -54,7 +54,7 @@ public class ReporteJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = reporte.getIdReporte();
+                Long id = reporte.getIdReporte();
                 if (findReporte(id) == null) {
                     throw new NonexistentEntityException("The reporte with id " + id + " no longer exists.");
                 }
@@ -112,7 +112,7 @@ public class ReporteJpaController implements Serializable {
         }
     }
 
-    public Reporte findReporte(String id) {
+    public Reporte findReporte(Long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Reporte.class, id);

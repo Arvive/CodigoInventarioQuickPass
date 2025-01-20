@@ -12,9 +12,8 @@ import javax.persistence.Id;
 public class Reporte implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String idReporte;
+    private Long idReporte;
     private LocalDateTime fechaGeneracion;
-    private String tipoReporte;
     private String contenido;
 
     
@@ -23,18 +22,16 @@ public class Reporte implements Serializable {
         this.fechaGeneracion = LocalDateTime.now();
     }
 
-    public Reporte(String idReporte, LocalDateTime fechaGeneracion, String tipoReporte, String contenido) {
-        this.idReporte = idReporte;
-        this.fechaGeneracion = fechaGeneracion;
-        this.tipoReporte = tipoReporte;
+    public Reporte( String contenido) {
+        this.fechaGeneracion = LocalDateTime.now();
         this.contenido = contenido;
     }
 
-    public String getIdReporte() {
+    public Long getIdReporte() {
         return idReporte;
     }
 
-    public void setIdReporte(String idReporte) {
+    public void setIdReporte(Long idReporte) {
         this.idReporte = idReporte;
     }
 
@@ -44,14 +41,6 @@ public class Reporte implements Serializable {
 
     public void setFechaGeneracion(LocalDateTime fechaGeneracion) {
         this.fechaGeneracion = fechaGeneracion;
-    }
-
-    public String getTipoReporte() {
-        return tipoReporte;
-    }
-
-    public void setTipoReporte(String tipoReporte) {
-        this.tipoReporte = tipoReporte;
     }
 
     public String getContenido() {
@@ -64,7 +53,7 @@ public class Reporte implements Serializable {
 
     @Override
     public String toString() {
-        return "Reporte{" + "idReporte=" + idReporte + ", fechaGeneracion=" + fechaGeneracion + ", tipoReporte=" + tipoReporte + ", contenido=" + contenido + '}';
+        return "Reporte{" + "idReporte=" + idReporte + ", fechaGeneracion=" + fechaGeneracion + ", contenido=" + contenido + '}';
     }
     
 }
