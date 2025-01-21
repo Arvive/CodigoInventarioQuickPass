@@ -78,6 +78,7 @@ public class Usuario implements Serializable {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+    
 
     
 }

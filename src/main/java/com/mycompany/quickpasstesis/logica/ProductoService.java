@@ -9,11 +9,8 @@ import java.util.List;
 
 public class ProductoService {
     
-    private final ProductoJpaController productoController;
-
-    public ProductoService(ProductoJpaController productoController) {
-        this.productoController = productoController;
-    }
+    ProductoJpaController productoController = new ProductoJpaController();
+    
 
     // Registrar un producto
     public void registrarProducto(Producto producto) throws Exception {

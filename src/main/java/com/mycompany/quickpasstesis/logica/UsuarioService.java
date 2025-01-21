@@ -15,11 +15,7 @@ import java.util.List;
  */
 public class UsuarioService {
     
-    private final UsuarioJpaController usuarioJpaController;
-
-    public UsuarioService(UsuarioJpaController usuarioJpaController) {
-        this.usuarioJpaController = usuarioJpaController;
-    }
+    UsuarioJpaController usuarioJpaController = new UsuarioJpaController();// se cambia del codigo anterior
     
      // Verificar si el usuario en sesión tiene el rol de ADMINISTRADOR
     private void verificarAccesoAdministrador(Usuario usuarioSesion) {
@@ -27,7 +23,40 @@ public class UsuarioService {
             throw new SecurityException("Acceso denegado: Solo los administradores pueden realizar esta operación.");
         }
     }
+    // Método para verificar si ya existe un administrador
+    public boolean existeAdministrador() {
+        List<Usuario> usuarios = usuarioJpaController.findUsuarioEntities();
+        for (Usuario usuario : usuarios) {
+            if (usuario.getTipoRol() == Usuario.TipoRol.ADMINISTRADOR) {
+                return true;  // Si encontramos un administrador, retornamos true
+            }
+        }
+        return false;  // Si no encontramos un administrador
+    }
+     // Método para crear un administrador si no existe
+    public void crearAdministradorSiNoExiste() throws PreexistingEntityException, Exception {
+        if (!existeAdministrador()) {
+            // Crear un nuevo administrador
+            Usuario admin = new Usuario("admin123", "Administrador", Usuario.TipoRol.ADMINISTRADOR, "admin@clinica.com", "adminpassword");
+            usuarioJpaController.create(admin);  // Guardar el administrador en la base de datos
+            System.out.println("Administrador creado con éxito.");
+        } else {
+            System.out.println("El administrador ya existe.");
+        }
+    }
+    
+    public Usuario autenticarUsuario(String idUsuario, String contrasena) {
+        // Buscar usuario por su ID
+        Usuario usuario = usuarioJpaController.findUsuario(idUsuario);
+        
+        if (usuario != null && usuario.getContrasena().equals(contrasena)) {
+            return usuario;  // Retorna el usuario si las credenciales son válidas
+        }
+        return null;  // Si no se encuentra el usuario o la contraseña no coincide
+    }
 
+
+    
     // Método para crear un usuario
     public void crearUsuario(Usuario usuario, Usuario usuarioSesion) throws PreexistingEntityException, Exception {
         // Verificar si el usuario en sesión es un administrador

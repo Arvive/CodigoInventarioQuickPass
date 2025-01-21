@@ -8,12 +8,12 @@ package com.mycompany.quickpasstesis.igu;
  *
  * @author Usuario
  */
-public class RegistroProductos extends javax.swing.JFrame {
+public class RegistroProductosForm extends javax.swing.JFrame {
 
     /**
      * Creates new form RegistroUsuarios
      */
-    public RegistroProductos() {
+    public RegistroProductosForm() {
         initComponents();
     }
 

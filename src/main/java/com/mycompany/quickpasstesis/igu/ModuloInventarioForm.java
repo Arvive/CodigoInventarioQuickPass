@@ -8,12 +8,12 @@ package com.mycompany.quickpasstesis.igu;
  *
  * @author Usuario
  */
-public class ModuloInventario extends javax.swing.JFrame {
+public class ModuloInventarioForm extends javax.swing.JFrame {
 
     /**
      * Creates new form ModuloInventario
      */
-    public ModuloInventario() {
+    public ModuloInventarioForm() {
         initComponents();
     }
 

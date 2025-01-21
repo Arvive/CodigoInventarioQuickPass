@@ -2,10 +2,10 @@
 package com.mycompany.quickpasstesis.igu;
 
 
-public class RegistroUsuarios extends javax.swing.JFrame {
+public class RegistroUsuariosForm extends javax.swing.JFrame {
 
 
-    public RegistroUsuarios() {
+    public RegistroUsuariosForm() {
         initComponents();
     }
 

@@ -8,12 +8,12 @@ package com.mycompany.quickpasstesis.igu;
  *
  * @author Usuario
  */
-public class PantallaPrincipal extends javax.swing.JFrame {
+public class PantallaPrincipalForm extends javax.swing.JFrame {
 
     /**
      * Creates new form PantallaPrincipal
      */
-    public PantallaPrincipal() {
+    public PantallaPrincipalForm() {
         initComponents();
     }
 

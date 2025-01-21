@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.quickpasstesis.persistencia;
 
 import com.mycompany.quickpasstesis.logica.Usuario;
@@ -13,19 +10,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-/**
- *
- * @author Usuario
- */
+
 public class UsuarioJpaController implements Serializable {
 
     public UsuarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
+    
+    public UsuarioJpaController() {//creado constructor
+        emf = Persistence.createEntityManagerFactory("QuickPassPU");
+       }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -139,5 +139,25 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public Usuario buscarUsuarioPorId(String idUsuario) {
+    EntityManager em = getEntityManager();
+    try {
+        // Crea una consulta JPQL para buscar el usuario por idUsuario
+        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario", Usuario.class);
+        query.setParameter("idUsuario", idUsuario);
+        
+        // Ejecuta la consulta y obtiene el resultado
+        List<Usuario> usuarios = query.getResultList();
+        if (usuarios != null && !usuarios.isEmpty()) {
+            return usuarios.get(0);  // Retorna el primer usuario encontrado
+        }
+    } finally {
+        em.close();
+    }
+    
+    return null;  // Si no encuentra el usuario, retorna null
+}
+
     
 }

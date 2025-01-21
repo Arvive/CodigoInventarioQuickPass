@@ -4,8 +4,11 @@
 
 package com.mycompany.quickpasstesis;
 
+import com.mycompany.quickpasstesis.igu.InicioSesionForm;
 import com.mycompany.quickpasstesis.logica.Producto;
 import com.mycompany.quickpasstesis.logica.Usuario;
+import com.mycompany.quickpasstesis.logica.UsuarioService;
+import com.mycompany.quickpasstesis.persistencia.UsuarioJpaController;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,7 +20,22 @@ public class QuickPassTesis {
 
     public static void main(String[] args) {
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuickPassPU");
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            
+            public void run (){
+            
+                new InicioSesionForm ().setVisible(true);
+            }
+        });
+    
+    
+    }
+        
+        
+        
+        
+        
+       /* EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuickPassPU");
         EntityManager em = emf.createEntityManager();
         
         em.getTransaction().begin();
@@ -56,4 +74,4 @@ public class QuickPassTesis {
         
       */  
     }
-}
+
