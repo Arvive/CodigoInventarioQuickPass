@@ -7,10 +7,6 @@ package com.mycompany.quickpasstesis.logica;
 import com.mycompany.quickpasstesis.persistencia.ReporteJpaController;
 import java.util.List;
 
-/**
- *
- * @author Usuario
- */
 public class ReporteService {
     
 

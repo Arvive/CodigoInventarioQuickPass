@@ -24,7 +24,10 @@ public class QuickPassTesis {
             
             public void run (){
             
-                new InicioSesionForm ().setVisible(true);
+                InicioSesionForm inicio = new InicioSesionForm ();
+                inicio.setLocationRelativeTo(null);
+                inicio.setVisible(true);
+                
             }
         });
     

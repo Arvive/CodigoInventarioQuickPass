@@ -19,10 +19,11 @@ public class UsuarioService {
     
      // Verificar si el usuario en sesión tiene el rol de ADMINISTRADOR
     private void verificarAccesoAdministrador(Usuario usuarioSesion) {
-        if (usuarioSesion.getTipoRol() != Usuario.TipoRol.ADMINISTRADOR) {
+        if (usuarioSesion.getTipoRol() != Usuario.TipoRol.ADMINISTRADOR) {// aca si cambio a usuario deja crear usuarios
             throw new SecurityException("Acceso denegado: Solo los administradores pueden realizar esta operación.");
         }
     }
+        
     // Método para verificar si ya existe un administrador
     public boolean existeAdministrador() {
         List<Usuario> usuarios = usuarioJpaController.findUsuarioEntities();
@@ -37,7 +38,7 @@ public class UsuarioService {
     public void crearAdministradorSiNoExiste() throws PreexistingEntityException, Exception {
         if (!existeAdministrador()) {
             // Crear un nuevo administrador
-            Usuario admin = new Usuario("admin123", "Administrador", Usuario.TipoRol.ADMINISTRADOR, "admin@clinica.com", "adminpassword");
+            Usuario admin = new Usuario("admin123", "Administrador", Usuario.TipoRol.ADMINISTRADOR, "admin@uia.com", "123");
             usuarioJpaController.create(admin);  // Guardar el administrador en la base de datos
             System.out.println("Administrador creado con éxito.");
         } else {

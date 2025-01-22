@@ -234,6 +234,7 @@ public class InicioSesionForm extends javax.swing.JFrame {
         // Si las credenciales son válidas, se abre la pantalla principal
         JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso");
         PantallaPrincipalForm pantallaPrincipal = new PantallaPrincipalForm();
+        pantallaPrincipal.setLocationRelativeTo(null);
         pantallaPrincipal.setVisible(true);
         this.setVisible(false);  // Ocultar la pantalla de inicio de sesión
     } else {
