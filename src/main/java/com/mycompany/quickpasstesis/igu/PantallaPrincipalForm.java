@@ -31,7 +31,7 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
         jPanelPPrincipl = new javax.swing.JPanel();
         jLabelPPrincipal = new javax.swing.JLabel();
         jPanelBtn = new javax.swing.JPanel();
-        bntCargarDatos1 = new javax.swing.JButton();
+        bntModuloINV = new javax.swing.JButton();
         btnRegistroUsuario = new javax.swing.JButton();
         bntConsultasReportes = new javax.swing.JButton();
         btnRegistro = new javax.swing.JButton();
@@ -51,12 +51,12 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
 
         jPanelBtn.setBackground(new java.awt.Color(255, 255, 255));
 
-        bntCargarDatos1.setFont(new java.awt.Font("Segoe UI", 2, 16)); // NOI18N
-        bntCargarDatos1.setText("Módulo Inventario");
-        bntCargarDatos1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        bntCargarDatos1.addActionListener(new java.awt.event.ActionListener() {
+        bntModuloINV.setFont(new java.awt.Font("Segoe UI", 2, 16)); // NOI18N
+        bntModuloINV.setText("Módulo Inventario");
+        bntModuloINV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bntModuloINV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntCargarDatos1ActionPerformed(evt);
+                bntModuloINVActionPerformed(evt);
             }
         });
 
@@ -72,6 +72,11 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
         bntConsultasReportes.setFont(new java.awt.Font("Segoe UI", 2, 16)); // NOI18N
         bntConsultasReportes.setText("Consultas y Reportes");
         bntConsultasReportes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bntConsultasReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntConsultasReportesActionPerformed(evt);
+            }
+        });
 
         btnRegistro.setFont(new java.awt.Font("Segoe UI", 2, 16)); // NOI18N
         btnRegistro.setText("Registro QuickPass");
@@ -112,14 +117,14 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
                     .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntConsultasReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntCargarDatos1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bntModuloINV, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23))
         );
         jPanelBtnLayout.setVerticalGroup(
             jPanelBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBtnLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(bntCargarDatos1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bntModuloINV, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -195,9 +200,15 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bntCargarDatos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCargarDatos1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bntCargarDatos1ActionPerformed
+    private void bntModuloINVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntModuloINVActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            ModuloInventarioForm moduloInventarioForm = new ModuloInventarioForm();
+            moduloInventarioForm.setLocationRelativeTo(null); // Centra la ventana
+            moduloInventarioForm.setVisible(true); // Muestra el formulario
+        }
+    });
+    }//GEN-LAST:event_bntModuloINVActionPerformed
 
     private void btnRegistroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroUsuarioActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -228,14 +239,24 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMantenimientoActionPerformed
 
+    private void bntConsultasReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntConsultasReportesActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            ConsultaReporteForm consultaReporteForm = new ConsultaReporteForm();
+            consultaReporteForm.setLocationRelativeTo(null); // Centra la ventana
+            consultaReporteForm.setVisible(true); // Muestra el formulario
+        }
+    });
+    }//GEN-LAST:event_bntConsultasReportesActionPerformed
+
     /**
      * @param args the command line arguments
      */
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntCargarDatos1;
     private javax.swing.JButton bntConsultasReportes;
+    private javax.swing.JButton bntModuloINV;
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnMantenimiento;
     private javax.swing.JButton btnRegistro;

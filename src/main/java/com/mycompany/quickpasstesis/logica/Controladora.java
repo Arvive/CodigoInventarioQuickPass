@@ -4,44 +4,40 @@
  */
 package com.mycompany.quickpasstesis.logica;
 
+import com.mycompany.quickpasstesis.persistencia.ControladoraPersistencia;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author Usuario
  */
 public class Controladora {
     
-    
-   /* public class ProductoService { algo asi para restriccion en numeros de serie 
+    ControladoraPersistencia controlPersis = new ControladoraPersistencia();
 
-    @PersistenceContext
-    private EntityManager em;
 
-    public boolean existeNumeroSerie(String numeroSerie) {
-        // Verificar si ya existe un producto con ese número de serie
-        Long count = em.createQuery("SELECT COUNT(p) FROM Producto p WHERE p.numeroSerie = :numeroSerie", Long.class)
-                       .setParameter("numeroSerie", numeroSerie)
-                       .getSingleResult();
-        return count > 0;
-    }
-
-    public void crearProducto(Producto producto) {
-        if (existeNumeroSerie(producto.getNumeroSerie())) {
-            throw new IllegalArgumentException("El número de serie ya existe.");
-        }
+    public void guardar(String numeroSerie, String numeroCaja, int cantidad, BigDecimal precio, String categoria, String estado, String oficina, String observaciones) {
         
-        em.persist(producto);
+        Producto producto = new Producto();
+        
+        producto.setCategoria(categoria);
+        producto.setNumeroSerie(numeroSerie);
+        producto.setNumeroCaja(numeroCaja);
+        producto.setCantidad(cantidad);
+        producto.setPrecioDisp(precio);
+        producto.setEstado(estado);
+        producto.setOficina(oficina);
+        producto.setObservaciones(observaciones);
+        producto.setFechaRegistro(LocalDateTime.now());//ver aca si pasa algo porque no este dentro del metodo
+        producto.calcularFechaVencimiento();
+        controlPersis.guardar(producto);
+        
     }
-}*/
+}
+            
 
     
-    /*UsuarioService usuarioService = new UsuarioService(em);// se CREAN CLASES DE SERVICIOS PARA ESTO
-        if (usuarioService.existeCedula(usuario.getCedula())) {
-            System.out.println("La cédula ya está registrada.");
-        } else if (usuarioService.existeCorreo(usuario.getCorreo())) {
-            System.out.println("El correo ya está registrado.");
-        } else {
-            em.persist(usuario);
-            em.getTransaction().commit();
-            System.out.println("Usuario creado con éxito: " + usuario);
-        }*/
-}
+ 
+    
+    

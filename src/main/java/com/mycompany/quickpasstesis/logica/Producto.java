@@ -18,18 +18,15 @@ public class Producto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idProducto;
-    @Enumerated(EnumType.STRING)
-    private Categoria categoria;
+  
+    private String categoria;
     private String numeroSerie;
     private String numeroCaja;
-    @Enumerated(EnumType.STRING)
-    private Oficina oficina;
+    private String oficina;
     private int cantidad; // para poder contar cantidad de productos 
     private BigDecimal precioDisp;// de momento todos tienen el mismo costo
-    @Enumerated(EnumType.STRING)
-    private Estado estado;//danado, activo, inactivo
-    @Enumerated(EnumType.STRING)
-    private Tipo tipoDisp; //prepago,postpago
+    private String estado;//danado, activo, inactivo
+    private String tipoDisp; //prepago,postpago
     private String numSobreValor; // con lo que se envia
     private String observaciones; 
     private String personRecibe;
@@ -37,32 +34,11 @@ public class Producto implements Serializable {
     private LocalDate fechaVencimiento;// cada dispositivo se vence 4 anos despues del registro
     private LocalDateTime fechaDevolucion; // no siempre sucede, solo en casos especificos
     
-    public enum Categoria {
-    QUICKPASS,
-    }
-    
-    public enum Estado {
-    ACTIVO, 
-    DEFECTUOSO,
-    INACTIVO,
-    DEVUELTO,
-    }
-    
-    public enum Tipo{
-    PREPAGO,
-    POSTPAGO,
-    }
-    
-    public enum Oficina{
-    OFICINA_CENTRAL,
-    SAN_PEDRO,
-    CURRIDABAT,
-    }
 
     public Producto() {
     }
 
-    public Producto(int idProducto, Categoria categoria, String numeroSerie, String numeroCaja, Oficina oficina, int cantidad, BigDecimal precioDisp, Estado estado, Tipo tipoDisp, String numSobreValor, String observaciones, String personRecibe, LocalDateTime fechaRegistro, LocalDate fechaVencimiento, LocalDateTime fechaDevolucion) {
+    public Producto(int idProducto, String categoria, String numeroSerie, String numeroCaja, String oficina, int cantidad, BigDecimal precioDisp, String estado, String tipoDisp, String numSobreValor, String observaciones, String personRecibe, LocalDateTime fechaRegistro, LocalDate fechaVencimiento, LocalDateTime fechaDevolucion) {
         this.idProducto = idProducto;
         this.categoria = categoria;
         this.numeroSerie = numeroSerie;
@@ -98,11 +74,11 @@ public class Producto implements Serializable {
         this.idProducto = idProducto;
     }
 
-    public Categoria getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
@@ -122,11 +98,11 @@ public class Producto implements Serializable {
         this.numeroCaja = numeroCaja;
     }
 
-    public Oficina getOficina() {
+    public String getOficina() {
         return oficina;
     }
 
-    public void setOficina(Oficina oficina) {
+    public void setOficina(String oficina) {
         this.oficina = oficina;
     }
 
@@ -146,21 +122,23 @@ public class Producto implements Serializable {
         this.precioDisp = precioDisp;
     }
 
-    public Estado getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    public Tipo getTipoDisp() {
+    public String getTipoDisp() {
         return tipoDisp;
     }
 
-    public void setTipoDisp(Tipo tipoDisp) {
+    public void setTipoDisp(String tipoDisp) {
         this.tipoDisp = tipoDisp;
     }
+
+  
 
     public String getNumSobreValor() {
         return numSobreValor;
@@ -209,6 +187,8 @@ public class Producto implements Serializable {
     public void setFechaDevolucion(LocalDateTime fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
+
+   
     
     public void calcularFechaVencimiento() {// calculo de fecha auto 
     if (fechaRegistro != null) {
@@ -221,5 +201,7 @@ public class Producto implements Serializable {
     public String toString() {
         return "Producto{" + "idProducto=" + idProducto + ", categoria=" + categoria + ", numeroSerie=" + numeroSerie + ", numeroCaja=" + numeroCaja + ", oficina=" + oficina + ", cantidad=" + cantidad + ", precioDisp=" + precioDisp + ", estado=" + estado + ", tipoDisp=" + tipoDisp + ", numSobreValor=" + numSobreValor + ", observaciones=" + observaciones + ", personRecibe=" + personRecibe + ", fechaRegistro=" + fechaRegistro + ", fechaVencimiento=" + fechaVencimiento + ", fechaDevolucion=" + fechaDevolucion + '}';
     }
+
+    
   
 }
