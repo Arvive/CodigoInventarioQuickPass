@@ -7,6 +7,7 @@ package com.mycompany.quickpasstesis.logica;
 import com.mycompany.quickpasstesis.persistencia.ControladoraPersistencia;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *
@@ -33,6 +34,12 @@ public class Controladora {
         producto.calcularFechaVencimiento();
         controlPersis.guardar(producto);
         
+    }
+
+    public List<Producto> traerProductos() {
+        
+        
+       return controlPersis.traerProductos ();
     }
 }
             

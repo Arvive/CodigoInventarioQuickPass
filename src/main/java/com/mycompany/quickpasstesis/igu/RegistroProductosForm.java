@@ -286,7 +286,18 @@ public class RegistroProductosForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
+    txtnumSerie.setText("");
+    txtNumCaja.setText("");
+    txtCantidad.setText("");
+    txtObservaciones.setText("");
+    txtPrecio.setText("");
+    jComboBoxEstado.setSelectedIndex(0);
+    jComboBoxOficina.setSelectedIndex(0);
+    jComboBoxcategoria.setSelectedIndex(0);
+    
+    
+    
+    
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnGuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarRegistroActionPerformed
@@ -302,7 +313,7 @@ public class RegistroProductosForm extends javax.swing.JFrame {
         String observaciones = txtObservaciones.getText();
         control.guardar(numeroSerie, numeroCaja,cantidad,precio,categoria, estado, oficina, observaciones );
         
-        JOptionPane optionPane = new JOptionPane("Producto credo correctamente");
+        JOptionPane optionPane = new JOptionPane("Producto creado correctamente");
                 optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
                 JDialog dialog = optionPane.createDialog("Creacion Producto");
                 dialog.setAlwaysOnTop(true);

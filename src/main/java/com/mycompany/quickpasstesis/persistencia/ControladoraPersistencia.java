@@ -5,6 +5,7 @@
 package com.mycompany.quickpasstesis.persistencia;
 
 import com.mycompany.quickpasstesis.logica.Producto;
+import java.util.List;
 
 /**
  *
@@ -19,6 +20,11 @@ public class ControladoraPersistencia {
         //crear base de datos el product
         productoJpa.create(producto);
         
+    }
+//busca todos los registros y asigna lo que yo diga
+    public List<Producto> traerProductos() {
+        
+        return productoJpa.findProductoEntities();
     }
     
     
