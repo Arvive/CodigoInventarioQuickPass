@@ -41,6 +41,10 @@ public class Controladora {
         
        return controlPersis.traerProductos ();
     }
+
+    public void borrarProducto(int idProducto) {
+    controlPersis.borrarProducto (idProducto);  
+    }
 }
             
 

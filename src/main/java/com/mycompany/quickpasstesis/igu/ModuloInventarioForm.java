@@ -7,6 +7,8 @@ package com.mycompany.quickpasstesis.igu;
 import com.mycompany.quickpasstesis.logica.Controladora;
 import com.mycompany.quickpasstesis.logica.Producto;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,7 +39,6 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        btnGuardar = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
         btnDevoluciones = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -58,16 +59,6 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
         jLabel1.setText("Modulo Inventario");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-
-        btnGuardar.setBackground(new java.awt.Color(153, 153, 153));
-        btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
 
         btnRegistrar.setBackground(new java.awt.Color(153, 153, 153));
         btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -141,9 +132,7 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
                         .addComponent(btnDevoluciones)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(439, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,8 +144,7 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
                     .addComponent(btnEditar)
                     .addComponent(btnEliminar)
                     .addComponent(btnDevoluciones)
-                    .addComponent(btnRegistrar)
-                    .addComponent(btnGuardar))
+                    .addComponent(btnRegistrar))
                 .addGap(24, 24, 24))
         );
 
@@ -167,7 +155,7 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(269, 269, 269)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(487, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -225,9 +213,46 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDevolucionesActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
+        
+        if (jTableInventario.getRowCount()> 0){//si tiene mas de 0 filas
+        
+        if (jTableInventario.getSelectedRow() != -1){//que se selecione una fila
+            
+            int idProducto = Integer.parseInt(String.valueOf
+        (jTableInventario.getValueAt(jTableInventario.getSelectedRow(),0)));// traiga el valor de la fila 0
+            
+            control.borrarProducto(idProducto);//primero aca y se crean en controladora y persis
+            
+            mostrarMensaje("Producto eliminado correctamente", "Info", "Borrar Producto");
+            cargarTabla();//se vuelve a cargar para que actualice pantalla
+        
+        }
+        else{
+            mostrarMensaje("No se selecciona ninguna fila", "Error", "Error al borrar");
 
+            }
+        }
+        else {
+        
+            mostrarMensaje("No hay nada en la tabla", "Error", "Error al borrar");
+        }
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+    public void mostrarMensaje (String mensaje, String tipo, String titulo){
+            JOptionPane optionPane = new JOptionPane(mensaje);
+            if (tipo.equals("Info")){
+            
+                optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+            }else if(tipo.equals("Error")){
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+            }
+
+                JDialog dialog = optionPane.createDialog(titulo);
+                dialog.setAlwaysOnTop(true);
+                dialog.setVisible(true);
+    
+    }
+    
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -237,17 +262,6 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
             }
         });        // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
-        //  String usuario = txtUsuario.getText();
-        //  String contra = txtContra.getText();
-        // String rol = (String) cmbRol.getSelectedItem();
-
-        // control.crearUsuario(usuario,contra,rol);
-
-        // mostrarMensaje("Usuario creado correctamente", "Info", "Creación exitosa");
-    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
@@ -263,7 +277,6 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
     private javax.swing.JButton btnDevoluciones;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
