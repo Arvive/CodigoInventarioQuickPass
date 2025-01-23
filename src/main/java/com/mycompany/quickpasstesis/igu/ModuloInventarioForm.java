@@ -265,6 +265,7 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
             ModificarInventarioForm pantallaModif = new ModificarInventarioForm(idProducto);
             pantallaModif.setVisible(true);
             pantallaModif.setLocationRelativeTo(null);
+            this.dispose();
             
             }
         else{

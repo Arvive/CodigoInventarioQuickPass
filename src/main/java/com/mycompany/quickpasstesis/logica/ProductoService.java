@@ -81,12 +81,12 @@ public class ProductoService {
         }
     }
 
-    // Buscar productos por estado
+    /*// Buscar productos por estado
     public List<Producto> buscarProductosPorEstado(Producto.Estado estado) {
         return obtenerTodosLosProductos().stream()
                 .filter(producto -> producto.getEstado() == estado)
                 .toList();
-    }
+    }*/
 
     // Buscar productos que están próximos a vencerse
     public List<Producto> buscarProductosProximosAVencerse(int diasAnticipacion) {

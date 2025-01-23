@@ -42,6 +42,15 @@ public class ControladoraPersistencia {
          return productoJpa.findProducto(idProducto);
     }
 
+    public void modificarProducto(Producto producto) {
+        try {
+            productoJpa.edit(producto);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
  
     
     

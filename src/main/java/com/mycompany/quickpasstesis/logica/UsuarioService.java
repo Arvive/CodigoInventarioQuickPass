@@ -89,37 +89,7 @@ public class UsuarioService {
         return usuarioJpaController.findUsuario(id);
     }
     
-   /* public void registrarUsuario(String idUsuario, String nombre, String correo, String password) {
-    // Verifica si ya existe un administrador
-    Usuario admin = usuarioJpaController.findUsuario("admin123");
-    
-    // Si no existe, este usuario será el primer administrador
-    if (admin == null) {
-        admin = new Usuario();
-        admin.setIdUsuario(idUsuario);
-        admin.setNombre(nombre);
-        admin.setCorreo(correo);
-        admin.setPassword(password); // Asegúrate de cifrar la contraseña
-        admin.setRol("ADMIN"); // Este es el primer administrador
-        try {
-            usuarioJpaController.create(admin);
-        } catch (Exception e) {
-            // Manejo de errores
-        }
-    } else {
-        // Si ya hay un administrador, se registra como usuario normal
-        Usuario usuario = new Usuario();
-        usuario.setIdUsuario(idUsuario);
-        usuario.setNombre(nombre);
-        usuario.setCorreo(correo);
-        usuario.setPassword(password); // Asegúrate de cifrar la contraseña
-        usuario.setRol("USER");
-        try {
-            usuarioJpaController.create(usuario);
-        } catch (Exception e) {
-            // Manejo de errores
-        }
-    }*/
+   
 }
 
 

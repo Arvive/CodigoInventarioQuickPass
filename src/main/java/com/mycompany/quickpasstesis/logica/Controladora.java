@@ -6,6 +6,7 @@ package com.mycompany.quickpasstesis.logica;
 
 import com.mycompany.quickpasstesis.persistencia.ControladoraPersistencia;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -50,6 +51,25 @@ public class Controladora {
 
     public Producto traerProducto(int idProducto) {
        return controlPersis.traerProducto (idProducto);
+    }
+
+    public void modificarProducto(Producto producto, String numeroSerie, String numeroCaja, 
+            String sobreValor, String persoRecibe, String fechaDevol, String categoria, 
+            String estado, String oficina, String tipo, String observaciones) {
+        
+      producto.setNumeroSerie(numeroSerie);
+      producto.setNumeroCaja(numeroCaja);
+      producto.setNumSobreValor(sobreValor);
+      producto.setPersonRecibe(persoRecibe);
+      producto.setFechaDevolucion(LocalDate.EPOCH);//revisar aca
+      producto.setCategoria(categoria);
+      producto.setEstado(estado);
+      producto.setOficina(oficina);
+      producto.setTipoDisp(tipo);
+      producto.setObservaciones(observaciones);
+      
+      controlPersis.modificarProducto(producto);
+      
     }
 }
             

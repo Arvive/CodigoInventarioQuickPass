@@ -6,6 +6,9 @@ package com.mycompany.quickpasstesis.igu;
 
 import com.mycompany.quickpasstesis.logica.Controladora;
 import com.mycompany.quickpasstesis.logica.Producto;
+import java.math.BigDecimal;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,6 +17,7 @@ import com.mycompany.quickpasstesis.logica.Producto;
 public class ModificarInventarioForm extends javax.swing.JFrame {
     Controladora control = null;
     int idProducto;
+    Producto producto;//variable global
 
     /**
      * Creates new form ModificarInventario
@@ -336,15 +340,46 @@ public class ModificarInventarioForm extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
-        //  String usuario = txtUsuario.getText();
-        //  String contra = txtContra.getText();
-        // String rol = (String) cmbRol.getSelectedItem();
-
-        // control.crearUsuario(usuario,contra,rol);
-
-        // mostrarMensaje("Usuario creado correctamente", "Info", "Creación exitosa");
+        String numeroSerie = txtSerie.getText();
+        String numeroCaja = txtNunCaja.getText();
+        String sobreValor = txtnumSobre.getText();
+        String persoRecibe = txtPersonRecibe.getText();
+        String observaciones = txtObservaciones.getText();
+        String fechaDevol = txtFechaDevolucion.getText();
+        
+        String categoria = (String) jComboBoxCategoria.getSelectedItem(); //cambio
+        String estado = (String) jComboBoxEstado.getSelectedItem();
+        String oficina = (String) jComboBoxOficina.getSelectedItem();// me falta confis observaciones
+        String tipo = (String) jComboBoxTipo.getSelectedItem();
+        
+        
+        control.modificarProducto(producto,numeroSerie, numeroCaja,sobreValor,persoRecibe,// se declara la primera variable globlar
+                fechaDevol,categoria, estado, oficina,tipo, observaciones );
+        
+        mostrarMensaje("Editado Correctamente", "Info", "Editar");
+        
+       ModuloInventarioForm pantallaInvent = new ModuloInventarioForm();//abre de nuevo la popantalla princ y cierra esta
+       pantallaInvent.setVisible(true);
+       pantallaInvent.setLocationRelativeTo(null);
+       
+       this.dispose();
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    public void mostrarMensaje (String mensaje, String tipo, String titulo){
+            JOptionPane optionPane = new JOptionPane(mensaje);
+            if (tipo.equals("Info")){
+            
+                optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+            }else if(tipo.equals("Error")){
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+            }
+
+                JDialog dialog = optionPane.createDialog(titulo);
+                dialog.setAlwaysOnTop(true);
+                dialog.setVisible(true);
+    
+    }
     private void txtSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSerieActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSerieActionPerformed
@@ -388,7 +423,7 @@ public class ModificarInventarioForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarDatos(int idProducto) {
-      Producto producto = control.traerProducto(idProducto);
+      this.producto = control.traerProducto(idProducto);
       
       txtSerie.setText(producto.getNumeroSerie());
       txtNunCaja.setText(producto.getNumeroCaja());
