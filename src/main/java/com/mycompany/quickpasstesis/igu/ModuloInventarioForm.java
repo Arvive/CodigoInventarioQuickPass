@@ -254,13 +254,34 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
     }
     
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ModificarInventarioForm modificarInventarioForm = new ModificarInventarioForm();
-                modificarInventarioForm.setLocationRelativeTo(null); // Centra la ventana
-                modificarInventarioForm.setVisible(true); // Muestra el formulario
+       
+        if (jTableInventario.getRowCount()> 0){//si tiene mas de 0 filas
+        
+        if (jTableInventario.getSelectedRow() != -1){//que se selecione una fila
+            
+            int idProducto = Integer.parseInt(String.valueOf
+        (jTableInventario.getValueAt(jTableInventario.getSelectedRow(),0)));// traiga el valor de la fila 0
+            
+            ModificarInventarioForm pantallaModif = new ModificarInventarioForm(idProducto);
+            pantallaModif.setVisible(true);
+            pantallaModif.setLocationRelativeTo(null);
+            
             }
-        });        // TODO add your handling code here:
+        else{
+            mostrarMensaje("No se selecciona ninguna fila", "Error", "Error al borrar");
+
+            }
+        }
+        else {
+        
+            mostrarMensaje("No hay nada en la tabla", "Error", "Error al borrar");
+        }
+        
+        
+        
+        
+        
+              // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

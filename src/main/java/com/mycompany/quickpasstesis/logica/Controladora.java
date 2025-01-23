@@ -32,6 +32,7 @@ public class Controladora {
         producto.setObservaciones(observaciones);
         producto.setFechaRegistro(LocalDateTime.now());//ver aca si pasa algo porque no este dentro del metodo
         producto.calcularFechaVencimiento();
+        
         controlPersis.guardar(producto);
         
     }
@@ -44,6 +45,11 @@ public class Controladora {
 
     public void borrarProducto(int idProducto) {
     controlPersis.borrarProducto (idProducto);  
+    }
+
+
+    public Producto traerProducto(int idProducto) {
+       return controlPersis.traerProducto (idProducto);
     }
 }
             

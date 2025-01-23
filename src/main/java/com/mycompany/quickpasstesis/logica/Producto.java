@@ -32,7 +32,7 @@ public class Producto implements Serializable {
     private String personRecibe;
     private LocalDateTime fechaRegistro;
     private LocalDate fechaVencimiento;// cada dispositivo se vence 4 anos despues del registro
-    private LocalDateTime fechaDevolucion; // no siempre sucede, solo en casos especificos
+    private LocalDate fechaDevolucion; // no siempre sucede, solo en casos especificos
     
 
     public Producto() {
@@ -63,7 +63,7 @@ public class Producto implements Serializable {
         // sume los 4 anos de vencimiento auto al crear objeto
   
         calcularFechaVencimiento();// si algo falla revisar aca
-        this.fechaDevolucion = fechaDevolucion;
+        this.fechaVencimiento = fechaVencimiento;
     }
 
     public int getIdProducto() {
@@ -180,11 +180,11 @@ public class Producto implements Serializable {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    public LocalDateTime getFechaDevolucion() {
+    public LocalDate getFechaDevolucion() {
         return fechaDevolucion;
     }
 
-    public void setFechaDevolucion(LocalDateTime fechaDevolucion) {
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
 

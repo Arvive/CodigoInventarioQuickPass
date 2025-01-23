@@ -37,6 +37,12 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public Producto traerProducto(int idProducto) {
+         return productoJpa.findProducto(idProducto);
+    }
+
+ 
     
     
 }
