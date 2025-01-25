@@ -7,6 +7,8 @@ package com.mycompany.quickpasstesis.igu;
 import com.mycompany.quickpasstesis.logica.Controladora;
 import com.mycompany.quickpasstesis.logica.Producto;
 import java.math.BigDecimal;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -362,7 +364,7 @@ public class ModificarInventarioForm extends javax.swing.JFrame {
        pantallaInvent.setVisible(true);
        pantallaInvent.setLocationRelativeTo(null);
        
-       this.dispose();
+ 
         
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -432,12 +434,26 @@ public class ModificarInventarioForm extends javax.swing.JFrame {
       txtObservaciones.setText(producto.getObservaciones());
       
       if (producto.getFechaDevolucion() != null) {// si se rompe revisar aca 
-      txtFechaDevolucion.setText(producto.getFechaDevolucion().toString());//fecha ojo aca hay algo mal, revisar 
+          
+           try {
+        // Formatear la fecha correctamente
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaFormateada = producto.getFechaDevolucion().format(formatter);
+        txtFechaDevolucion.setText(fechaFormateada);
+    } catch (DateTimeParseException e) {
+        // Mostrar mensaje al usuario si ocurre un error en el formato
+        JOptionPane.showMessageDialog(this, 
+            "La fecha ingresada es incorrecta. Por favor, ingrese la fecha en el formato dd/MM/yyyy.", 
+            "Error de Formato", 
+            JOptionPane.ERROR_MESSAGE);
+        txtFechaDevolucion.setText(""); // Limpiar el campo si hay error
+    }        
+      
       //como se hace correctamente
       } else {
-        String fechaDevolucion = "Sin fecha"; // O cualquier mensaje por defecto
-    // Manejar el caso en que no haya fecha de devolución
-}
+          txtFechaDevolucion.setText("dd/MM/yyyy");
+      }
+
       
       
       switch (producto.getOficina()){
@@ -492,8 +508,7 @@ public class ModificarInventarioForm extends javax.swing.JFrame {
     jComboBoxTipo.setSelectedIndex(0); // También puedes asignar un valor por defecto aquí.
 }
 
-    } 
-
+    }
 }
 
 

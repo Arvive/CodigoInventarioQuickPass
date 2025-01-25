@@ -8,6 +8,8 @@ import com.mycompany.quickpasstesis.persistencia.ControladoraPersistencia;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 /**
@@ -61,7 +63,23 @@ public class Controladora {
       producto.setNumeroCaja(numeroCaja);
       producto.setNumSobreValor(sobreValor);
       producto.setPersonRecibe(persoRecibe);
-      producto.setFechaDevolucion(LocalDate.EPOCH);//revisar aca
+      
+      if (fechaDevol != null && !fechaDevol.isEmpty()) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Ajustar al formato usado
+            LocalDate fechaEditada = LocalDate.parse(fechaDevol, formatter);
+            producto.setFechaDevolucion(fechaEditada);
+        } catch (DateTimeParseException e) {
+            System.err.println("Error al parsear la fecha de devolución: " + e.getMessage());
+            producto.setFechaDevolucion(null); // Si falla la conversión, asignar null
+        }
+    } else {
+        producto.setFechaDevolucion(null); // Si no hay fecha ingresada, asignar null
+    }
+      
+      
+      
+      
       producto.setCategoria(categoria);
       producto.setEstado(estado);
       producto.setOficina(oficina);

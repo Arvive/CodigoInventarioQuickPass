@@ -196,6 +196,8 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
                 RegistroProductosForm RegistroProductosForm = new RegistroProductosForm();
                 RegistroProductosForm.setLocationRelativeTo(null); // Centra la ventana
                 RegistroProductosForm.setVisible(true); // Muestra el formulario
+                //dispose();
+                cargarTabla();
             }
         });
 
@@ -265,7 +267,7 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
             ModificarInventarioForm pantallaModif = new ModificarInventarioForm(idProducto);
             pantallaModif.setVisible(true);
             pantallaModif.setLocationRelativeTo(null);
-            this.dispose();
+            
             
             }
         else{
@@ -322,7 +324,7 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
         
         String titulos [] = {"ID Producto", "Categoria","Num Serie","Num Caja","Estado","Oficina",
             "Fecha Registro", "Fecha Venci","Fecha Devol","Tipo","Cantidad","Sobre Valor","Observaciones",
-            "Persona Recibe", "Precio"};
+            "Colaborador", "Precio"};
         
         tabla.setColumnIdentifiers(titulos);
         
