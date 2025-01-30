@@ -7,12 +7,14 @@ package com.mycompany.quickpasstesis.persistencia;
 import com.mycompany.quickpasstesis.logica.Producto;
 import com.mycompany.quickpasstesis.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -138,5 +140,51 @@ public class ProductoJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<Producto> findProductosPorFiltros(//agregado fecha opcional 
+    LocalDateTime fechaDesde, LocalDateTime fechaHasta,
+    String oficina, String estado, String numSerie
+) {
+    EntityManager em = getEntityManager();
+    try {
+        String jpql = "SELECT p FROM Producto p WHERE 1 = 1"; // Condición siempre verdadera
+
+        // Agregar condiciones solo si los filtros no son nulos o vacíos
+        if (fechaDesde != null && fechaHasta != null) {
+            jpql += " AND p.fechaRegistro BETWEEN :fechaDesde AND :fechaHasta";
+        }
+        if (oficina != null && !oficina.isEmpty()) {
+            jpql += " AND p.oficina = :oficina";
+        }
+        if (estado != null && !estado.isEmpty()) {
+            jpql += " AND p.estado = :estado";
+        }
+        if (numSerie != null && !numSerie.isEmpty()) {
+            jpql += " AND p.numeroSerie = :numSerie";
+        }
+
+        TypedQuery<Producto> query = em.createQuery(jpql, Producto.class);
+
+        // Agregar parámetros solo si los filtros no son nulos o vacíos
+        if (fechaDesde != null && fechaHasta != null) {
+            query.setParameter("fechaDesde", fechaDesde);
+            query.setParameter("fechaHasta", fechaHasta);
+        }
+        if (oficina != null && !oficina.isEmpty()) {
+            query.setParameter("oficina", oficina);
+        }
+        if (estado != null && !estado.isEmpty()) {
+            query.setParameter("estado", estado);
+        }
+        if (numSerie != null && !numSerie.isEmpty()) {
+            query.setParameter("numSerie", numSerie);
+        }
+
+        return query.getResultList();
+    } finally {
+        em.close();
+    }
+}
+    
     
 }

@@ -4,6 +4,17 @@
  */
 package com.mycompany.quickpasstesis.igu;
 
+import com.mycompany.quickpasstesis.logica.Controladora;
+import com.mycompany.quickpasstesis.logica.Producto;
+import com.mycompany.quickpasstesis.persistencia.ControladoraPersistencia;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Usuario
@@ -15,7 +26,51 @@ public class ConsultaReporteForm extends javax.swing.JFrame {
      */
     public ConsultaReporteForm() {
         initComponents();
+        inicializarTabla();
+        llenarComboBox();
     }
+    
+    private void llenarComboBox() {
+    // Llenar ComboBox de estado-, Oficina Principal, San Pedro, Curridabat
+        ComboEstado.addItem("");
+        ComboEstado.addItem("Activo");
+        ComboEstado.addItem("Inactivo");
+        ComboEstado.addItem("Devuelto");
+        ComboEstado.addItem("Defectuoso");
+        
+        // Llenar ComboBox de oficina
+        comboOficina.addItem("");
+        comboOficina.addItem("-");
+        comboOficina.addItem("Oficina Principal");
+        comboOficina.addItem("San Pedro");
+        comboOficina.addItem("Curridabat");
+    
+}
+    
+    private void inicializarTabla() {
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("ID");
+    model.addColumn("Número de Serie");
+    model.addColumn("Oficina");
+    model.addColumn("Estado");
+    model.addColumn("Fecha Registro");
+    jTable1.setModel(model);
+}
+    private void mostrarResultadosEnTabla(List<Producto> productos) {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0); // Limpiar la tabla
+
+    for (Producto producto : productos) {
+        Object[] row = {
+            producto.getIdProducto(),
+            producto.getNumeroSerie(),
+            producto.getOficina(),
+            producto.getEstado(),
+            producto.getFechaRegistro()
+        };
+        model.addRow(row);
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,21 +82,26 @@ public class ConsultaReporteForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btnGuardar = new javax.swing.JButton();
-        btnLimpiar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        ComboEstado = new javax.swing.JComboBox<>();
+        comboOficina = new javax.swing.JComboBox<>();
+        txtFechaDesde = new javax.swing.JTextField();
+        txtFechaHasta = new javax.swing.JTextField();
+        txtNumSerie = new javax.swing.JTextField();
+        btnExportar = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setText("Modulo Inventario");
+        jLabelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabelTitulo.setText("Modulo Inventario");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -56,15 +116,21 @@ public class ConsultaReporteForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel2.setText("Fecha desde hasta");
+        jLabel2.setText("Fecha desde:");
 
         jLabel3.setText("Oficina");
 
-        jLabel4.setText("Número de caja**");
-
-        jLabel5.setText("Número de consecutivo");
+        jLabel5.setText("Número de Serie:");
 
         jLabel6.setText("Estado");
+
+        jLabel4.setText("Fecha hasta:");
+
+        txtFechaDesde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaDesdeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,17 +140,30 @@ public class ConsultaReporteForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(204, 204, 204)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabelTitulo))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboOficina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(98, 98, 98)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ComboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -93,35 +172,43 @@ public class ConsultaReporteForm extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addComponent(jLabelTitulo)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel4)
+                    .addComponent(txtFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(comboOficina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(ComboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        btnGuardar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnGuardar.setText("Exportar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btnExportar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnExportar.setText("Exportar");
+        btnExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+                btnExportarActionPerformed(evt);
             }
         });
 
-        btnLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnLimpiar.setText("Consultar");
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
+                btnConsultarActionPerformed(evt);
             }
         });
 
@@ -132,9 +219,9 @@ public class ConsultaReporteForm extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(btnLimpiar)
+                .addComponent(btnConsultar)
                 .addGap(18, 18, 18)
-                .addComponent(btnGuardar)
+                .addComponent(btnExportar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -143,27 +230,44 @@ public class ConsultaReporteForm extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnLimpiar))
+                    .addComponent(btnExportar)
+                    .addComponent(btnConsultar))
                 .addGap(36, 36, 36))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        //metodo de limpiar para que ponga los campos en blanco
-       /* txtNombre.setText("");
-        txtRaza.setText("");
-        txtColor.setText("");
-        txtNomDuenio.setText("");
-        txtCelDuenio.setText("");
-        txtObservaciones.setText("");
-        cmbAlergico.setSelectedIndex(0);//pone la primera opcion como defautl
-        cmbAtEsp.setSelectedIndex(0)*/
-    }//GEN-LAST:event_btnLimpiarActionPerformed
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+     try {
+        LocalDateTime fechaDesde = null;
+        LocalDateTime fechaHasta = null;
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // Validar fechas solo si se ingresaron
+        if (!txtFechaDesde.getText().isEmpty()) {
+            fechaDesde = validarFecha(txtFechaDesde.getText(), "Fecha Desde");
+        }
+        if (!txtFechaHasta.getText().isEmpty()) {
+            fechaHasta = validarFecha(txtFechaHasta.getText(), "Fecha Hasta");
+        }
+
+        String oficina = (String) comboOficina.getSelectedItem();
+        String estado = (String) ComboEstado.getSelectedItem();
+        String numSerie = txtNumSerie.getText();
+
+        Controladora controladora = new Controladora();
+        List<Producto> productos = controladora.buscarProductosPorFiltros(
+            fechaDesde, fechaHasta, oficina, estado, numSerie
+        );
+
+        mostrarResultadosEnTabla(productos);
+    } catch (IllegalArgumentException e) {
+        // El mensaje de error ya se mostró en validarFecha
+    }
+  
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
 /*
         String nombreMasco = txtNombre.getText();// lo que se escriba en la IGU lo guarda en esta variable nombreMasco
         String raza = txtRaza.getText();
@@ -181,24 +285,43 @@ public class ConsultaReporteForm extends javax.swing.JFrame {
         JDialog dialog = optionPane.createDialog("Guardado exitoso");
         dialog.setAlwaysOnTop(true);
         dialog.setVisible(true); */
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_btnExportarActionPerformed
 
+    private void txtFechaDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaDesdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaDesdeActionPerformed
+    private LocalDateTime validarFecha(String fechaStr, String nombreCampo) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    try {
+        LocalDate fecha = LocalDate.parse(fechaStr, formatter);
+        return fecha.atStartOfDay(); // Convertir a LocalDateTime
+    } catch (DateTimeParseException e) {
+        JOptionPane.showMessageDialog(this, "Formato de fecha inválido en " + nombreCampo + ". Use yyyy-MM-dd.", "Error", JOptionPane.ERROR_MESSAGE);
+        throw new IllegalArgumentException("Formato de fecha inválido.");
+    }
+}
+    
     /**
      * @param args the command line arguments
      */
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnLimpiar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> ComboEstado;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnExportar;
+    private javax.swing.JComboBox<String> comboOficina;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtFechaDesde;
+    private javax.swing.JTextField txtFechaHasta;
+    private javax.swing.JTextField txtNumSerie;
     // End of variables declaration//GEN-END:variables
 }

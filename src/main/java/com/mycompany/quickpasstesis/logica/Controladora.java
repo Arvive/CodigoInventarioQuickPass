@@ -89,6 +89,10 @@ public class Controladora {
       controlPersis.modificarProducto(producto);
       
     }
+
+    public List<Producto> buscarProductosPorFiltros(LocalDateTime fechaDesde, LocalDateTime fechaHasta, String oficina, String estado, String numSerie) {
+       return controlPersis.buscarProductosPorFiltros(fechaDesde, fechaHasta, oficina, estado, numSerie);
+    }
 }
             
 

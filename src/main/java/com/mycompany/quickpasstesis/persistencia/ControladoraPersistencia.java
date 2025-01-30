@@ -6,6 +6,7 @@ package com.mycompany.quickpasstesis.persistencia;
 
 import com.mycompany.quickpasstesis.logica.Producto;
 import com.mycompany.quickpasstesis.persistencia.exceptions.NonexistentEntityException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,6 +50,10 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+
+    public List<Producto> buscarProductosPorFiltros(LocalDateTime fechaDesde, LocalDateTime fechaHasta, String oficina, String estado, String numSerie) {
+       return productoJpa.findProductosPorFiltros(fechaDesde, fechaHasta, oficina, estado, numSerie);
     }
 
  
