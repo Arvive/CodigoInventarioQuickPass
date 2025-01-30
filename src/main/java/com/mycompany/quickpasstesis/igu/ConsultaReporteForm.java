@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -268,23 +269,34 @@ public class ConsultaReporteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
-/*
-        String nombreMasco = txtNombre.getText();// lo que se escriba en la IGU lo guarda en esta variable nombreMasco
-        String raza = txtRaza.getText();
-        String color = txtColor.getText();
-        String nomDuenio = txtNomDuenio.getText();
-        String celDuenio= txtCelDuenio.getText();
-        String observaciones = txtObservaciones.getText();
-        String alergico = (String) cmbAlergico.getSelectedItem();//los combo box son objetos, los transforma a string
-        String atEsp = (String) cmbAtEsp.getSelectedItem();
+ DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    List<Producto> productos = new ArrayList<>();
 
-        control.guardar(nombreMasco,raza,color,nomDuenio,celDuenio,observaciones,alergico,atEsp);
+    // Obtener los datos de la tabla
+    for (int i = 0; i < model.getRowCount(); i++) {
+        int idProducto = (int) model.getValueAt(i, 0);
+        String numeroSerie = (String) model.getValueAt(i, 1);
+        String oficina = (String) model.getValueAt(i, 2);
+        String estado = (String) model.getValueAt(i, 3);
+        LocalDateTime fechaRegistro = (LocalDateTime) model.getValueAt(i, 4);
 
-        JOptionPane optionPane = new JOptionPane("Se guarda correctamente");
-        optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);// hay varios logitos segun el tipo de mensaje
-        JDialog dialog = optionPane.createDialog("Guardado exitoso");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true); */
+        Producto producto = new Producto();
+        producto.setIdProducto(idProducto);
+        producto.setNumeroSerie(numeroSerie);
+        producto.setOficina(oficina);
+        producto.setEstado(estado);
+        producto.setFechaRegistro(fechaRegistro);
+
+        productos.add(producto);
+    }
+
+    // Exportar a PDF
+    Controladora controladora = new Controladora();
+    controladora.exportarProductosAPDF(productos, "C:/Users/Usuario/OneDrive/Documentos/reporte.pdf");//vera
+    JOptionPane.showMessageDialog(this, "Reporte exportado a reporte.pdf");
+        
+        
+        
     }//GEN-LAST:event_btnExportarActionPerformed
 
     private void txtFechaDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaDesdeActionPerformed

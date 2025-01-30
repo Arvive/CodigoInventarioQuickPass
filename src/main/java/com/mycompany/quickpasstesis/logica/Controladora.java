@@ -93,6 +93,11 @@ public class Controladora {
     public List<Producto> buscarProductosPorFiltros(LocalDateTime fechaDesde, LocalDateTime fechaHasta, String oficina, String estado, String numSerie) {
        return controlPersis.buscarProductosPorFiltros(fechaDesde, fechaHasta, oficina, estado, numSerie);
     }
+
+    public void exportarProductosAPDF(List<Producto> productos, String reportepdf) {
+        PDFExporter.exportarProductosAPDF(productos, reportepdf);
+      
+    }
 }
             
 
