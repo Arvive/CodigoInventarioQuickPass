@@ -1,48 +1,49 @@
 
 package com.mycompany.quickpasstesis.igu;
 
+import com.mycompany.quickpasstesis.logica.Controladora;
 import com.mycompany.quickpasstesis.logica.Usuario;
-import com.mycompany.quickpasstesis.logica.UsuarioService;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
 
 public class InicioSesionForm extends javax.swing.JFrame {
     
-    private UsuarioService usuarioService;//creado
+    private Controladora controladora;//creado
     /**
      * Creates new form InicioSesion
      */
     public InicioSesionForm() {
         initComponents();
+        controladora = new Controladora();
         
+      // Agregar listeners para los campos de texto
         jTextFieldUsuario1.addFocusListener(new java.awt.event.FocusAdapter() {
-        public void focusGained(java.awt.event.FocusEvent evt) {
-            jTextFieldUsuario1FocusGained(evt);
-        }
-        public void focusLost(java.awt.event.FocusEvent evt) {
-            jTextFieldUsuario1FocusLost(evt);
-        }
-    });
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldUsuario1FocusGained(evt);
+            }
 
-    jPasswordFieldContra1.addFocusListener(new java.awt.event.FocusAdapter() {
-        public void focusGained(java.awt.event.FocusEvent evt) {
-            jPasswordFieldContra1FocusGained(evt);
-        }
-        public void focusLost(java.awt.event.FocusEvent evt) {
-            jPasswordFieldContra1FocusLost(evt);
-        }
-    });
-            usuarioService = new UsuarioService();//creado
-    
-         try {
-            usuarioService.crearAdministradorSiNoExiste();
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldUsuario1FocusLost(evt);
+            }
+        });
+
+        jPasswordFieldContra1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPasswordFieldContra1FocusGained(evt);
+            }
+
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPasswordFieldContra1FocusLost(evt);
+            }
+        });
+
+        // Crear el administrador si no existe
+        try {
+            controladora.crearAdministradorSiNoExiste();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        
-   
     }
     
 
@@ -229,18 +230,22 @@ public class InicioSesionForm extends javax.swing.JFrame {
          String usuario = jTextFieldUsuario1.getText();
     String contrasena = String.valueOf(jPasswordFieldContra1.getPassword());
     
-    // Validar usuario
     if (validarUsuario(usuario, contrasena)) {
-        // Si las credenciales son válidas, se abre la pantalla principal
-        JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso");
-        PantallaPrincipalForm pantallaPrincipal = new PantallaPrincipalForm();
-        pantallaPrincipal.setLocationRelativeTo(null);
-        pantallaPrincipal.setVisible(true);
-        this.setVisible(false);  // Ocultar la pantalla de inicio de sesión
-    } else {
-        // Si las credenciales son incorrectas, se muestra un mensaje de error
-        JOptionPane.showMessageDialog(this, "Credenciales incorrectas");
-    } 
+            // Si las credenciales son válidas, se abre la pantalla principal
+            JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso");
+
+            // Obtener el usuario autenticado
+            Usuario usuarioSesion = controladora.autenticarUsuario(usuario, contrasena);
+
+            // Abrir la pantalla principal y pasar el usuario en sesión
+            PantallaPrincipalForm pantallaPrincipal = new PantallaPrincipalForm(usuarioSesion);
+            pantallaPrincipal.setLocationRelativeTo(null);
+            pantallaPrincipal.setVisible(true);
+            this.setVisible(false);  // Ocultar la pantalla de inicio de sesión
+        } else {
+            // Si las credenciales son incorrectas, se muestra un mensaje de error
+            JOptionPane.showMessageDialog(this, "Credenciales incorrectas");
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -302,13 +307,8 @@ private void jPasswordFieldContra1FocusLost(java.awt.event.FocusEvent evt) {
     private javax.swing.JPanel jpanelCeleste;
     // End of variables declaration//GEN-END:variables
 
-   public boolean validarUsuario(String idUsuario, String contrasena){
-   
-       Usuario usuarioValido = usuarioService.autenticarUsuario(idUsuario, contrasena);
-       
-       if (usuarioValido != null){
-       return true;
-       }
-       return false;
-   }
+    private boolean validarUsuario(String idUsuario, String contrasena) {
+        Usuario usuarioValido = controladora.autenticarUsuario(idUsuario, contrasena);
+        return usuarioValido != null;
+    }
 }

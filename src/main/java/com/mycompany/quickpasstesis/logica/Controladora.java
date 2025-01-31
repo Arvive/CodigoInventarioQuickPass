@@ -98,6 +98,65 @@ public class Controladora {
         PDFExporter.exportarProductosAPDF(productos, reportepdf);
       
     }
+    
+     // Verificar si el usuario en sesión tiene el rol de ADMINISTRADOR
+    private void verificarAccesoAdministrador(Usuario usuarioSesion) {
+        if (usuarioSesion == null || usuarioSesion.getTipoRol() != Usuario.TipoRol.ADMINISTRADOR) {
+            throw new SecurityException("Acceso denegado: Solo los administradores pueden realizar esta operación.");
+        }
+    }
+
+    // Método para crear un administrador si no existe
+    public void crearAdministradorSiNoExiste() throws Exception {
+        if (!controlPersis.existeAdministrador()) {
+            Usuario admin = new Usuario("admin123", "Administrador", Usuario.TipoRol.ADMINISTRADOR, "admin@uia.com", "123");
+            controlPersis.crearUsuario(admin);
+            System.out.println("Administrador creado con éxito.");
+        } else {
+            System.out.println("El administrador ya existe.");
+        }
+    }
+
+    // Método para autenticar un usuario
+    public Usuario autenticarUsuario(String idUsuario, String contrasena) {
+        Usuario usuario = controlPersis.obtenerUsuarioPorId(idUsuario);
+        if (usuario != null && usuario.getContrasena().equals(contrasena)) {
+            return usuario;
+        }
+        return null;
+    }
+
+    // Método para crear un usuario
+    public void crearUsuario(Usuario usuario, Usuario usuarioSesion) throws Exception {
+        verificarAccesoAdministrador(usuarioSesion);
+        controlPersis.crearUsuario(usuario);
+    }
+
+    // Método para editar un usuario
+    public void editarUsuario(Usuario usuario, Usuario usuarioSesion) throws Exception {
+        verificarAccesoAdministrador(usuarioSesion);
+        controlPersis.editarUsuario(usuario);
+    }
+
+    // Método para eliminar un usuario
+    public void eliminarUsuario(String idUsuario, Usuario usuarioSesion) throws Exception {
+        verificarAccesoAdministrador(usuarioSesion);
+        controlPersis.eliminarUsuario(idUsuario);
+    }
+
+    // Método para obtener todos los usuarios
+    public List<Usuario> obtenerUsuarios() {
+        return controlPersis.obtenerUsuarios();
+    }
+
+    // Método para obtener un usuario por su ID
+    public Usuario obtenerUsuarioPorId(String id) {
+        return controlPersis.obtenerUsuarioPorId(id);
+    }
+    
+    
+    
+    
 }
             
 

@@ -5,6 +5,7 @@
 package com.mycompany.quickpasstesis.persistencia;
 
 import com.mycompany.quickpasstesis.logica.Producto;
+import com.mycompany.quickpasstesis.logica.Usuario;
 import com.mycompany.quickpasstesis.persistencia.exceptions.NonexistentEntityException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
 public class ControladoraPersistencia {
     
     ProductoJpaController productoJpa = new ProductoJpaController();
+    UsuarioJpaController usuarioJpa= new UsuarioJpaController();
 
     public void guardar(Producto producto) {
         
@@ -56,7 +58,36 @@ public class ControladoraPersistencia {
        return productoJpa.findProductosPorFiltros(fechaDesde, fechaHasta, oficina, estado, numSerie);
     }
 
- 
+    
+     public void crearUsuario(Usuario usuario) throws Exception {
+        usuarioJpa.create(usuario);
+    }
+
+    public void editarUsuario(Usuario usuario) throws Exception {
+        usuarioJpa.edit(usuario);
+    }
+
+    public void eliminarUsuario(String idUsuario) throws Exception {
+        usuarioJpa.destroy(idUsuario);
+    }
+
+    public List<Usuario> obtenerUsuarios() {
+        return usuarioJpa.findUsuarioEntities();
+    }
+
+    public Usuario obtenerUsuarioPorId(String id) {
+        return usuarioJpa.findUsuario(id);
+    }
+
+    public boolean existeAdministrador() {
+        List<Usuario> usuarios = usuarioJpa.findUsuarioEntities();
+        for (Usuario usuario : usuarios) {
+            if (usuario.getTipoRol() == Usuario.TipoRol.ADMINISTRADOR) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     
 }

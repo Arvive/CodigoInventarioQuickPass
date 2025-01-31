@@ -4,6 +4,7 @@
  */
 package com.mycompany.quickpasstesis.igu;
 
+import com.mycompany.quickpasstesis.logica.Usuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,12 +12,18 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class PantallaPrincipalForm extends javax.swing.JFrame {
+    private Usuario usuarioSesion;
 
     /**
      * Creates new form PantallaPrincipal
      */
-    public PantallaPrincipalForm() {
+    public PantallaPrincipalForm(Usuario usuarioSesion) {
         initComponents();
+        this.usuarioSesion = usuarioSesion;
+        
+        if (usuarioSesion.getTipoRol() != Usuario.TipoRol.ADMINISTRADOR){
+        btnRegistroUsuario.setEnabled(false);
+        }
     }
 
     /**
@@ -213,7 +220,16 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
     private void btnRegistroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroUsuarioActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
-            RegistroUsuariosForm registroUsuariosForm = new RegistroUsuariosForm();
+            
+            Usuario usuarioSesion = obternerUsuarioenSesion();
+            // Verifica si el usuario en sesión es válido
+            if (usuarioSesion == null) {
+                JOptionPane.showMessageDialog(null, "Debes iniciar sesión para acceder a esta función.");
+                return;
+            }
+
+            // Pasa el usuario en sesión al constructor de RegistroUsuariosForm
+            RegistroUsuariosForm registroUsuariosForm = new RegistroUsuariosForm(usuarioSesion);
             registroUsuariosForm.setLocationRelativeTo(null); // Centra la ventana
             registroUsuariosForm.setVisible(true); // Muestra el formulario
         }
@@ -249,6 +265,13 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
     });
     }//GEN-LAST:event_bntConsultasReportesActionPerformed
 
+    private Usuario obternerUsuarioenSesion (){
+    
+    return this.usuarioSesion;
+    }
+    public void setUsuarioSesion(Usuario usuarioSesion) {
+        this.usuarioSesion = usuarioSesion;
+    }
     /**
      * @param args the command line arguments
      */

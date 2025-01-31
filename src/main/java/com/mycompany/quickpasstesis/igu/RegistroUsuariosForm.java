@@ -1,17 +1,22 @@
 
 package com.mycompany.quickpasstesis.igu;
 
+import com.mycompany.quickpasstesis.logica.Controladora;
 import com.mycompany.quickpasstesis.logica.Usuario;
-import com.mycompany.quickpasstesis.logica.UsuarioService;
+
 import com.mycompany.quickpasstesis.persistencia.exceptions.PreexistingEntityException;
 import javax.swing.JOptionPane;
 
 
 public class RegistroUsuariosForm extends javax.swing.JFrame {
+    
+    private Controladora controladora = new Controladora();
+    private Usuario usuarioSesion;
 
 
-    public RegistroUsuariosForm() {
+    public RegistroUsuariosForm(Usuario usuarioSesion) {
         initComponents();
+        this.usuarioSesion = usuarioSesion;
         cargarRoles();
         
     }
@@ -228,27 +233,25 @@ public class RegistroUsuariosForm extends javax.swing.JFrame {
         
         Usuario.TipoRol rol = Usuario.TipoRol.valueOf(rolSelec);
         
-        Usuario nuevoUsuario = new Usuario();
-        
-        nuevoUsuario.setIdUsuario(idUsuario);
-        nuevoUsuario.setNombre(nombreComp);
-        nuevoUsuario.setCorreo(email);
-        nuevoUsuario.setContrasena(contrasena);
-        nuevoUsuario.setTipoRol(rol);
-        
+        // Validar que solo los administradores puedan crear otros administradores
+        if (rol == Usuario.TipoRol.ADMINISTRADOR && 
+            (usuarioSesion == null || usuarioSesion.getTipoRol() != Usuario.TipoRol.ADMINISTRADOR)) {
+            JOptionPane.showMessageDialog(this, "Acceso denegado: Solo los administradores pueden crear otros administradores.");
+            return;
+        }
+
+        // Crear el nuevo usuario
+        Usuario nuevoUsuario = new Usuario(idUsuario, nombreComp, rol, email, contrasena);
+
         try {
-            UsuarioService usuarioService = new UsuarioService();
-            
-            usuarioService.crearUsuario(nuevoUsuario, nuevoUsuario);
-            
-           JOptionPane.showMessageDialog(this, "Usuario guardado con éxito.");
-    } catch (PreexistingEntityException e) {
-        // Manejar el caso donde el usuario ya existe
-        JOptionPane.showMessageDialog(this, "El usuario ya existe.");
-    } catch (Exception ex) {
-        // Manejar otros errores
-        JOptionPane.showMessageDialog(this, "Error al guardar el usuario: " + ex.getMessage());
-    }
+            // Guardar el usuario usando la Controladora
+            controladora.crearUsuario(nuevoUsuario, usuarioSesion);
+            JOptionPane.showMessageDialog(this, "Usuario guardado con éxito.");
+        } catch (PreexistingEntityException e) {
+            JOptionPane.showMessageDialog(this, "Error: El usuario ya existe.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al guardar el usuario: " + ex.getMessage());
+        }
        
         
         
