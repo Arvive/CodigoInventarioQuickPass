@@ -1,0 +1,197 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package com.mycompany.quickpasstesis.igu;
+
+import com.mycompany.quickpasstesis.logica.Controladora;
+import com.mycompany.quickpasstesis.logica.Producto;
+import java.math.BigDecimal;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author Usuario
+ */
+public class ContadoresForm extends javax.swing.JFrame {
+    
+    private Controladora control = new Controladora();
+
+    /**
+     * Creates new form ContadoresForm
+     */
+    public ContadoresForm() {
+        initComponents();
+        initTabla();
+        calcularContadores();
+        
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+    }
+    
+private void calcularContadores() {
+    List<Producto> listaProductos = control.traerProductos();
+
+    // Contadores para cantidad
+    int cantidadActivos = 0;
+    int cantidadInactivos = 0;
+    int cantidadDevueltos = 0;
+    int cantidadDefectuosos = 0;
+    int cantidadAsignados = 0;
+
+    // Contadores para precio
+    BigDecimal precioActivos = BigDecimal.ZERO;
+    BigDecimal precioInactivos = BigDecimal.ZERO;
+    BigDecimal precioDevueltos = BigDecimal.ZERO;
+    BigDecimal precioDefectuosos = BigDecimal.ZERO;
+    BigDecimal precioAsignados = BigDecimal.ZERO;
+
+    if (listaProductos != null) {
+        for (Producto producto : listaProductos) {
+            switch (producto.getEstado()) {
+                case "Activo":
+                    cantidadActivos += producto.getCantidad();
+                    precioActivos = precioActivos.add(
+                        producto.getPrecioDisp().multiply(new BigDecimal(producto.getCantidad()))
+                    );
+                    break;
+                case "Inactivo":
+                    cantidadInactivos += producto.getCantidad();
+                    precioInactivos = precioInactivos.add(
+                        producto.getPrecioDisp().multiply(new BigDecimal(producto.getCantidad()))
+                    );
+                    break;
+                case "Devuelto":
+                    cantidadDevueltos += producto.getCantidad();
+                    precioDevueltos = precioDevueltos.add(
+                        producto.getPrecioDisp().multiply(new BigDecimal(producto.getCantidad()))
+                    );
+                    break;
+                case "Defectuoso":
+                    cantidadDefectuosos += producto.getCantidad();
+                    precioDefectuosos = precioDefectuosos.add(
+                        producto.getPrecioDisp().multiply(new BigDecimal(producto.getCantidad()))
+                    );
+                    break;
+                case "Asignado":
+                    cantidadAsignados += producto.getCantidad();
+                    precioAsignados = precioAsignados.add(
+                        producto.getPrecioDisp().multiply(new BigDecimal(producto.getCantidad()))
+                    );
+                    break;
+            }
+        }
+    }
+
+    // Obtener el modelo de la tabla
+    DefaultTableModel model = (DefaultTableModel) jTableContadores.getModel();
+    model.setRowCount(0); // Limpiar la tabla
+
+    // Agregar filas con los valores calculados
+    model.addRow(new Object[]{"Activos", cantidadActivos, precioActivos});
+    model.addRow(new Object[]{"Inactivos", cantidadInactivos, precioInactivos});
+    model.addRow(new Object[]{"Devueltos", cantidadDevueltos, precioDevueltos});
+    model.addRow(new Object[]{"Defectuosos", cantidadDefectuosos, precioDefectuosos});
+    model.addRow(new Object[]{"Asignados", cantidadAsignados, precioAsignados});
+
+    // Agregar filas para los precios totales
+    BigDecimal precioTotalActivosAsignados = precioActivos.add(precioAsignados);
+    BigDecimal precioTotalInactivosDevueltosDefectuosos = precioInactivos.add(precioDevueltos).add(precioDefectuosos);
+
+    model.addRow(new Object[]{"$ Total Activos + Asignados", "", precioTotalActivosAsignados});
+    model.addRow(new Object[]{"$ Total Inactivos + Devueltos + Defectuosos", "", precioTotalInactivosDevueltosDefectuosos});
+}
+
+
+
+private void initTabla() {
+    // Crear el modelo de la tabla
+    DefaultTableModel model = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false; // Hacer que las celdas no sean editables
+        }
+    };
+
+    // Agregar las columnas
+    model.addColumn("Estado");
+    model.addColumn("Cantidad");
+    model.addColumn("Costo Total $");
+
+    // Asignar el modelo a la tabla
+    jTableContadores.setModel(model);
+}
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableContadores = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTableContadores.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTableContadores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTableContadores);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @param args the command line arguments
+     */
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableContadores;
+    // End of variables declaration//GEN-END:variables
+}

@@ -28,6 +28,8 @@ public class ModificarInventarioForm extends javax.swing.JFrame {
         control = new Controladora();
         initComponents();
         cargarDatos(idProducto);
+        
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
     }
 
     /**
@@ -491,6 +493,8 @@ public class ModificarInventarioForm extends javax.swing.JFrame {
               break;
             case "Defectuoso":
               jComboBoxEstado.setSelectedIndex(3);
+            case "Asignado":
+              jComboBoxEstado.setSelectedIndex(4);
               break;
                      
       }

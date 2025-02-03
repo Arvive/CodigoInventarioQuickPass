@@ -5,6 +5,8 @@
 package com.mycompany.quickpasstesis.igu;
 
 import com.mycompany.quickpasstesis.logica.Usuario;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +26,15 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
         if (usuarioSesion.getTipoRol() != Usuario.TipoRol.ADMINISTRADOR){
         btnRegistroUsuario.setEnabled(false);
         }
+        
+         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+         
+         addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                confirmarSalida();
+            }
+        });
     }
 
     /**
@@ -41,9 +52,7 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
         bntModuloINV = new javax.swing.JButton();
         btnRegistroUsuario = new javax.swing.JButton();
         bntConsultasReportes = new javax.swing.JButton();
-        btnRegistro = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
-        btnMantenimiento = new javax.swing.JButton();
         jpanelCeleste = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -85,30 +94,12 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
             }
         });
 
-        btnRegistro.setFont(new java.awt.Font("Segoe UI", 2, 16)); // NOI18N
-        btnRegistro.setText("Registro QuickPass");
-        btnRegistro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistroActionPerformed(evt);
-            }
-        });
-
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 2, 16)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesión");
         btnCerrarSesion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarSesionActionPerformed(evt);
-            }
-        });
-
-        btnMantenimiento.setFont(new java.awt.Font("Segoe UI", 2, 16)); // NOI18N
-        btnMantenimiento.setText("Mantenimiento");
-        btnMantenimiento.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnMantenimiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMantenimientoActionPerformed(evt);
             }
         });
 
@@ -120,8 +111,6 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
                 .addContainerGap(115, Short.MAX_VALUE)
                 .addGroup(jPanelBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntConsultasReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntModuloINV, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -132,15 +121,11 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
             .addGroup(jPanelBtnLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(bntModuloINV, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(54, 54, 54)
                 .addComponent(bntConsultasReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegistroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(54, 54, 54)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(102, Short.MAX_VALUE))
         );
@@ -236,10 +221,6 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
     });
     }//GEN-LAST:event_btnRegistroUsuarioActionPerformed
 
-    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistroActionPerformed
-
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         int opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea cerrar sesión?", 
             "Confirmar Cierre de Sesión", 
@@ -250,10 +231,6 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
             this.dispose();
             }
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
-
-    private void btnMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMantenimientoActionPerformed
 
     private void bntConsultasReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntConsultasReportesActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -272,6 +249,19 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
     public void setUsuarioSesion(Usuario usuarioSesion) {
         this.usuarioSesion = usuarioSesion;
     }
+     private void confirmarSalida() {
+        int opcion = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de que quieres salir?",
+            "Confirmar salida",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            System.exit(0); // Cerrar la aplicación
+        }
+     }
+    
     /**
      * @param args the command line arguments
      */
@@ -281,8 +271,6 @@ public class PantallaPrincipalForm extends javax.swing.JFrame {
     private javax.swing.JButton bntConsultasReportes;
     private javax.swing.JButton bntModuloINV;
     private javax.swing.JButton btnCerrarSesion;
-    private javax.swing.JButton btnMantenimiento;
-    private javax.swing.JButton btnRegistro;
     private javax.swing.JButton btnRegistroUsuario;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelPPrincipal;

@@ -6,6 +6,7 @@ package com.mycompany.quickpasstesis.igu;
 
 import com.mycompany.quickpasstesis.logica.Controladora;
 import com.mycompany.quickpasstesis.logica.Producto;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -25,6 +26,8 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
     public ModuloInventarioForm() {
         control= new Controladora();
         initComponents();
+        
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
     }
 
     /**
@@ -40,11 +43,13 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnRegistrar = new javax.swing.JButton();
-        btnDevoluciones = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableInventario = new javax.swing.JTable();
+        lblCantidadActivos = new javax.swing.JLabel();
+        lblPrecioTotal = new javax.swing.JLabel();
+        btnContadores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -67,17 +72,6 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
-            }
-        });
-
-        btnDevoluciones.setBackground(new java.awt.Color(153, 153, 153));
-        btnDevoluciones.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnDevoluciones.setForeground(new java.awt.Color(255, 255, 255));
-        btnDevoluciones.setText("Devoluciones");
-        btnDevoluciones.setToolTipText("");
-        btnDevoluciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDevolucionesActionPerformed(evt);
             }
         });
 
@@ -116,6 +110,20 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableInventario);
 
+        lblCantidadActivos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblPrecioTotal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        btnContadores.setBackground(new java.awt.Color(153, 153, 153));
+        btnContadores.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnContadores.setForeground(new java.awt.Color(255, 255, 255));
+        btnContadores.setText("Contadores");
+        btnContadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContadoresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -125,27 +133,39 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDevoluciones)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(116, 116, 116)
+                                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(210, 210, 210)
+                                .addComponent(btnContadores, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(100, 100, 100)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblPrecioTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                            .addComponent(lblCantidadActivos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(116, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnDevoluciones)
-                    .addComponent(btnRegistrar))
-                .addGap(24, 24, 24))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCantidadActivos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEditar)
+                        .addComponent(btnEliminar)
+                        .addComponent(btnRegistrar)))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnContadores))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -155,10 +175,11 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(269, 269, 269)
                 .addComponent(jLabel1)
-                .addContainerGap(487, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(144, 144, 144))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,26 +214,24 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RegistroProductosForm RegistroProductosForm = new RegistroProductosForm();
-                RegistroProductosForm.setLocationRelativeTo(null); // Centra la ventana
-                RegistroProductosForm.setVisible(true); // Muestra el formulario
-                //dispose();
-                cargarTabla();
-            }
-        });
+                 RegistroProductosForm registroProductosForm = new RegistroProductosForm(ModuloInventarioForm.this);
+            registroProductosForm.setLocationRelativeTo(null); // Centra la ventana
+            registroProductosForm.setVisible(true); // Muestra el formulario
+
+            // Agregar un WindowListener para detectar cuando se cierra RegistroProductosForm
+            registroProductosForm.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+                    // Actualizar la tabla cuando se cierre RegistroProductosForm
+                    cargarTabla();
+                    actualizarContadores();
+                }
+            });
+        }
+    });
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void btnDevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolucionesActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                PantallaDevolucionesForm devolucionesForm = new PantallaDevolucionesForm ();
-                devolucionesForm.setLocationRelativeTo(null); // Centra la ventana
-                devolucionesForm.setVisible(true); // Muestra el formulario
-            }
-        });
-    }//GEN-LAST:event_btnDevolucionesActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         
@@ -292,13 +311,19 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
         cargarTabla();
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnContadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContadoresActionPerformed
+        ContadoresForm contadoresForm = new ContadoresForm();
+        contadoresForm.setLocationRelativeTo(null);
+        contadoresForm.setVisible(true);
+    }//GEN-LAST:event_btnContadoresActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDevoluciones;
+    private javax.swing.JButton btnContadores;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnRegistrar;
@@ -307,6 +332,8 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableInventario;
+    private javax.swing.JLabel lblCantidadActivos;
+    private javax.swing.JLabel lblPrecioTotal;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
@@ -362,5 +389,27 @@ public class ModuloInventarioForm extends javax.swing.JFrame {
         }
        
         jTableInventario.setModel(tabla);//ASIGNAR A LA TABLA
+        
+        actualizarContadores();
     }
+    
+    public void actualizarContadores() {
+    List<Producto> listaProductos = control.traerProductos();
+
+    int cantidadActivos = 0;
+    BigDecimal precioTotal = BigDecimal.ZERO;
+
+    if (listaProductos != null) {
+        for (Producto producto : listaProductos) {
+            if ("Activo".equals(producto.getEstado())) { // Verificar si el estado es "Activo"
+                cantidadActivos += producto.getCantidad();
+                precioTotal = precioTotal.add(producto.getPrecioDisp().multiply(new BigDecimal(producto.getCantidad())));
+            }
+        }
+    }
+
+    // Mostrar los resultados en los JLabel
+    lblCantidadActivos.setText("Total activos: " + cantidadActivos);
+    lblPrecioTotal.setText("Costo total activos: $" + precioTotal.toString());
+}
 }

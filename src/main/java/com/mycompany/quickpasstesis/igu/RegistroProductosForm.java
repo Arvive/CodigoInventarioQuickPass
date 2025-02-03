@@ -18,15 +18,23 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class RegistroProductosForm extends javax.swing.JFrame {
-    
+    private ModuloInventarioForm moduloInventarioForm;
     Controladora control = new Controladora();
 
     /**
      * Creates new form RegistroUsuarios
      */
-    public RegistroProductosForm() {
-       
+    public RegistroProductosForm(ModuloInventarioForm moduloInventarioForm) {
+       this.moduloInventarioForm = moduloInventarioForm;
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        
+          // Hacer los campos no editables y establecer el valor por defecto
+    txtPrecio.setEditable(false); // Hacer el campo no editable
+    txtPrecio.setText("1");       // Establecer el valor por defecto
+
+    txtCantidad.setEditable(false); // Hacer el campo no editable
+    txtCantidad.setText("35");       // Establecer el valor por defecto
         
     }
 
@@ -87,7 +95,7 @@ public class RegistroProductosForm extends javax.swing.JFrame {
 
         jLabelEstado.setText("Estado:");
 
-        jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", "Devuelto", "Defectuoso" }));
+        jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", "Devuelto", "Defectuoso", "Asignado" }));
         jComboBoxEstado.setToolTipText("");
 
         jLabelCantidad.setText("Cantidad:");
@@ -303,8 +311,8 @@ public class RegistroProductosForm extends javax.swing.JFrame {
     private void btnGuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarRegistroActionPerformed
         String numeroSerie = txtnumSerie.getText();
         String numeroCaja = txtNumCaja.getText();
-        int cantidad = Integer.parseInt(txtCantidad.getText());
-        BigDecimal precio = new BigDecimal (txtPrecio.getText());
+        int cantidad = 1;
+        BigDecimal precio = new BigDecimal ("35");
         
         String categoria = (String) jComboBoxcategoria.getSelectedItem(); //cambio
         String estado = (String) jComboBoxEstado.getSelectedItem();
@@ -318,6 +326,12 @@ public class RegistroProductosForm extends javax.swing.JFrame {
                 JDialog dialog = optionPane.createDialog("Creacion Producto");
                 dialog.setAlwaysOnTop(true);
                 dialog.setVisible(true);
+                
+                this.dispose();//hace quefuncione la carga al guardar en tabla,pero hay que registrar uno a 1
+                
+                if (moduloInventarioForm != null) {
+        moduloInventarioForm.actualizarContadores();
+    }
                         
        
     }//GEN-LAST:event_btnGuardarRegistroActionPerformed

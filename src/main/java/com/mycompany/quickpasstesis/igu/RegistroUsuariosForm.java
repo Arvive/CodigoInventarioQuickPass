@@ -19,6 +19,8 @@ public class RegistroUsuariosForm extends javax.swing.JFrame {
         this.usuarioSesion = usuarioSesion;
         cargarRoles();
         
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        
     }
 
 

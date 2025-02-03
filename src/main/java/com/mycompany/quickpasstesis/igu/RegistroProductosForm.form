@@ -251,11 +251,12 @@
             <Component class="javax.swing.JComboBox" name="jComboBoxEstado">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
+                  <StringArray count="5">
                     <StringItem index="0" value="Activo"/>
                     <StringItem index="1" value="Inactivo"/>
                     <StringItem index="2" value="Devuelto"/>
                     <StringItem index="3" value="Defectuoso"/>
+                    <StringItem index="4" value="Asignado"/>
                   </StringArray>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value=""/>

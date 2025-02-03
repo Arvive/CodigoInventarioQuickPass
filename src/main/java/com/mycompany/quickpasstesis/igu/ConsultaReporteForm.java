@@ -29,6 +29,8 @@ public class ConsultaReporteForm extends javax.swing.JFrame {
         initComponents();
         inicializarTabla();
         llenarComboBox();
+        
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
     }
     
     private void llenarComboBox() {
